@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Funcionario</title>
+</head>
+<body>
+    <form>
+        <h1>Editar Funcionario</h1>
+        <table>
+            {{formaFuncionario}}
+        </table>
+        <button type="submit"> Enviar </button>
+        {% csrf_token %}
+    </form>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+</head>
+<body>
+    <h1> Sistema de administracion CUA</h1>
+
+    <div>
+        Numero de Funcionarios: {{no_personas}}
+    </div>
+    <div>
+        <a href="nuevo_funcionario">Agregar Funcionario</a>
+    </div>
+    <div>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Codigo Funcionario</th>
+                            <th>Nombre</th>
+                            <th>Grado</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%  for funcionario in funcionarios %}
+                        <tr>
+                            <td>{{funcionario.id}}</td>
+                            <td>{{funcionario.codigo_funcionario}}</td>
+                            <td>{{funcionario.nombre_funcionario}}</td>
+                            <td>{{funcionario.grado_funcionario}}</td>
+                            <td><a href="detalle_funcionario/{{funcionario.id}}"> Ver </a> </td>
+                            <td><a href="editar_funcionario/{{funcionario.id}}"> Editar </a></td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+        
+    </div>
+</body>
+</html>
