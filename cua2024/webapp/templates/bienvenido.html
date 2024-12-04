@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido</title>
+
 </head>
 <body>
     <h1> Sistema de administracion CUA</h1>
@@ -22,8 +23,10 @@
                             <th>Codigo Funcionario</th>
                             <th>Nombre</th>
                             <th>Grado</th>
-                            <th></th>
-                            <th></th>
+                            <th>Departamento</th>
+                            <th>Estado</th>
+                            <th>  </th>
+                            <th>  </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,6 +36,8 @@
                             <td>{{funcionario.codigo_funcionario}}</td>
                             <td>{{funcionario.nombre_funcionario}}</td>
                             <td>{{funcionario.grado_funcionario}}</td>
+                            <td>{{funcionario.departamento_funcionario}}</td>
+                            <td>{{funcionario.estado_funcionario}}</td>
                             <td><a href="detalle_funcionario/{{funcionario.id}}"> Ver </a> </td>
                             <td><a href="editar_funcionario/{{funcionario.id}}"> Editar </a></td>
                         </tr>

@@ -1,16 +1,19 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from jsonschema import ValidationError
 
+from funcionarios.forms import FuncionarioForm
 from funcionarios.models import Funcionario,Grado
-from django.forms import modelform_factory
+from django.forms import modelform_factory, ModelChoiceField
+
+
 # Create your views here.
 
 def detalle_funcionario(request,id):
     #funcionario_var = Funcionario.objects.get(pk=id)
     funcionario_var = get_object_or_404(Funcionario,pk=id)
-    print(funcionario_var)
     return render(request,'funcionarios/detalle.html', {'funcionario':funcionario_var})
 
-FuncionarioForm = modelform_factory(Funcionario,exclude=[])
+#FuncionarioForm = modelform_factory(Funcionario,exclude=[])
 
 def nuevo_funcionario(request):
     if request.method == "POST":
@@ -18,12 +21,11 @@ def nuevo_funcionario(request):
         if formaFuncionario.is_valid():
             formaFuncionario.save()
             return redirect('index')
-        else:
-            return render (request, "funcionarios/nuevo.html",{'formaFuncionario':formaFuncionario})
-
-    else:    
+        
+    else:
         formaFuncionario = FuncionarioForm()
-        return render (request, "funcionarios/nuevo.html",{'formaFuncionario':formaFuncionario})
+
+    return render (request, "funcionarios/nuevo.html",{'formaFuncionario':formaFuncionario})
 
 def editar_funcionario(request, id):
     if request.method == "POST":
