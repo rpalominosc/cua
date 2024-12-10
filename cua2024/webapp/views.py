@@ -11,6 +11,11 @@ def bienvenido(request):
     funcionarios_var = Funcionario.objects.all()
     return render(request, 'bienvenido.html', {'no_personas' : no_personas_var, 'funcionarios' : funcionarios_var})
 
+def inicio(request):
+    
+    return render(request, 'inicio.html')
+
+
 #def despedirse(request):
 #    return HttpResponse ('Despedida desde Django')
 

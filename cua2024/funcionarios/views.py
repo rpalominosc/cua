@@ -9,6 +9,12 @@ import random, time
 
 # Create your views here.
 
+def pide_cod_func(request):
+    return render (request, "funcionarios/solicita_codigo.html")    
+
+
+
+
 def valida_existencia_cua():
     existe=True
     while existe:                               # Valida CUA unico  al generarlo

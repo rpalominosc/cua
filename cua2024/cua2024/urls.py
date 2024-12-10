@@ -17,18 +17,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from funcionarios.views import detalle_funcionario, nuevo_funcionario, editar_funcionario
-from webapp.views import bienvenido #, contacto, despedirse
+from funcionarios.views import detalle_funcionario, nuevo_funcionario, editar_funcionario, pide_cod_func
+from webapp.views import bienvenido,inicio #, contacto, despedirse
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', bienvenido, name='index'),
+    path('', inicio, name='index'),
     #path('despedida.html', despedirse),
     #path('contacto', contacto),
     path('detalle_funcionario/<int:id>',detalle_funcionario),
     path('nuevo_funcionario', nuevo_funcionario),
     path('editar_funcionario/<int:id>', editar_funcionario),
+    path('bienvenido',bienvenido),
+    path('codfuncionario',pide_cod_func),
+
 
 ] 
