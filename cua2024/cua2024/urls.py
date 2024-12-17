@@ -17,14 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from funcionarios.views import detalle_funcionario, nuevo_funcionario, editar_funcionario, pide_cod_func
+from funcionarios.views import detalle_funcionario, nuevo_funcionario, editar_funcionario, pide_cod_func,cua_funcionario
 from webapp.views import bienvenido,inicio #, contacto, despedirse
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', inicio, name='index'),
+    path('', inicio, name='home'),
     #path('despedida.html', despedirse),
     #path('contacto', contacto),
     path('detalle_funcionario/<int:id>',detalle_funcionario),
@@ -32,6 +32,8 @@ urlpatterns = [
     path('editar_funcionario/<int:id>', editar_funcionario),
     path('bienvenido',bienvenido),
     path('codfuncionario',pide_cod_func),
+    path('cua_funcionario',cua_funcionario),
+
 
 
 ] 

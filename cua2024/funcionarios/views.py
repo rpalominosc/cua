@@ -33,6 +33,11 @@ def detalle_funcionario(request,id):
     funcionario_var = get_object_or_404(Funcionario,pk=id)
     return render(request,'funcionarios/detalle.html', {'funcionario':funcionario_var})
 
+def cua_funcionario(request,cua_funcionario):
+    #funcionario_var = Funcionario.objects.get(pk=id)
+    funcionario_var = get_object_or_404(Funcionario,pk=cua_funcionario)
+    return render(request,'funcionarios/detalle.html', {'funcionario':funcionario_var})
+
 #FuncionarioForm = modelform_factory(Funcionario,exclude=[])
 
 def nuevo_funcionario(request):

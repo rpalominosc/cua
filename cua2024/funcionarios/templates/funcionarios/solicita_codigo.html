@@ -7,28 +7,33 @@
     <title>Ingrese Codigo Funcionario</title>
 </head>
 {%block content%}
-    <body>
-        <div id="id01" class="w3-modal">
-            <div class="w3-modal-content w3-animate-zoom">
-            
-              <header class="w3-container w3-teal">
-                <span onclick="document.getElementById('id01').style.display='none'"
-                class="w3-button w3-display-topright">&times;</span>
-                <h3>Ingreso Codigo Funcionario</h3>
-              </header>
-          
-              <div class="w3-container">
-                <p>Some text..</p>
-                <p>Some text..</p>
-              </div>
-          
-              <button type="submit" class="btn btn-outline-success"> Enviar </button>
-              <footer class="w3-container w3-teal">
-                <p>Modal Footer</p>
-              </footer>
-          
+
+  <body>
+    <div class="container">
+      <form action="cua_funcionario/{{codcua}}" method="POST">
+
+        <div class="row border justify-content-center align-items-center">
+            <p class="col-md-3 justify-content-center ">
+              <h4>Ingreso CUA Funcionario</h4>
+            </p>
+            <div class="col-auto">
+                <label for="ingresocua" class="col-form-label">Código Funcionario</label>
             </div>
-          </div>
-    </body>
+            <div class="col-auto">
+              <input type="text" maxlength=7 id="ingresocua" class="form-control" name="codcua">
+            </div>
+            <div class="col-auto">
+                <span id="HelpInline" class="form-text">
+                    Debe tener formato 999999-X
+                </span> 
+            </div>
+            <div class="col-auto">
+              <input type="submit" id="ingresocua" class="btn btn-success" >
+            </div>
+        </div>
+
+      </form>
+    </div>
+  </body>
 {%endblock content%}
 </html>
