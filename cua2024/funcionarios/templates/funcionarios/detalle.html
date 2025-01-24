@@ -1,28 +1,60 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
+
+{%block head%}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle Funcionario</title>
-    
-
+    {% block title %}Detalle Funcionario{% endblock %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/miestilo.css' %}">
 
 </head>
+{%endblock head%}
+
+
+
+
 {% block content %}
     <body>
-        <div class="container">
-            <h1 class="text-center">Detalle Funcionario</h1>
-            <div class="row gx-5">
-                <div>Id Funcionario: {{funcionario.id}} </div>
-                <div>Codigo Funcionario: {{funcionario.codigo_funcionario}} </div>
-                <div>Nombre Funcionario: {{funcionario.nombre_funcionario}} </div>
-                <div>C.U.A: {{funcionario.cua_funcionario}} </div>
-                <div>Grado: {{funcionario.grado_funcionario}} </div>
-                <div>Departamento: {{funcionario.departamento_funcionario}} </div>
-                <div>Estado: {{funcionario.estado_funcionario}} </div>
+        
+        <div class="card mx-auto" style="width: 55rem;" >
+            
+            <div class="card-body">
+                <h5 class="card-title text-center" >Identificación del funcionario</h5>
+                <div class="row  mb-3 p-3 mb-2 bg-success-subtle text-success-emphasis" >
+                    <label for="inputEmail3" class="col-sm-4 col-form-label">Codigo Funcionario: </label>
+                    <div class="col-sm-6 bg-success text-white col-form-label">
+                      {{funcionario.codigo_funcionario}}
+                    </div>
+                    <label for="inputEmail3" class="col-sm-4 col-form-label">Nombre Funcionario: </label>
+                    <div class="col-sm-6 bg-success text-white col-form-label">
+                      {{funcionario.nombre_funcionario}}
+                    </div>
+                    <label for="inputEmail3" class="col-sm-4 col-form-label">C.U.A Funcionario: </label>
+                    <div class="col-sm-6 bg-success text-white col-form-label">
+                      {{funcionario.cua_funcionario}}
+                    </div>
+                    <label for="inputEmail3" class="col-sm-4 col-form-label">Grado Funcionario: </label>
+                    <div class="col-sm-6 bg-success text-white col-form-label">
+                      {{funcionario.grado_funcionario}}
+                    </div>
+                    <label for="inputEmail3" class="col-sm-4 col-form-label">Departamento: </label>
+                    <div class="col-sm-6 bg-success text-white col-form-label">
+                      {{funcionario.departamento_funcionario}}
+                    </div>
+                    <label for="inputEmail3" class="col-sm-4 col-form-label">Estado </label>
+                    <div class="col-sm-6 bg-success text-white col-form-label">
+                      {{funcionario.estado_funcionario}}
+                    </div>
+                    
+                    
+                </div>
+                <p ><a href="{% url 'home' %}" class="btn btn-primary display:flex justify-content-center" >Regresar al Inicio</a></p>
+                
             </div>
-            <a href="{% url 'index' %}">Regresar al Inicio</a>
-        </div>    
+        </div>  
     </body>
+    
 {% endblock content %}
 </html>

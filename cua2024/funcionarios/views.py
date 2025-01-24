@@ -1,7 +1,7 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from jsonschema import ValidationError
-
-from funcionarios.forms import FuncionarioForm
+from django.core.exceptions import ObjectDoesNotExist
+from funcionarios.forms import FuncionarioForm, CuaFuncionario, CodFuncionario
 from funcionarios.models import Funcionario,Grado
 from django.forms import modelform_factory, ModelChoiceField
 import random, time
@@ -10,7 +10,82 @@ import random, time
 # Create your views here.
 
 def pide_cod_func(request):
-    return render (request, "funcionarios/solicita_codigo.html")    
+    return render (request, "funcionarios/name.html")   
+
+def selecciona_funcionario(request):
+    return render (request, "funcionarios/modiffunc.html")   
+
+
+def verificar_codigo_cua(request):
+    if request.method == 'POST':
+        codigo_form = CuaFuncionario(request.POST)
+        if codigo_form.is_valid():
+            codigo = codigo_form.cleaned_data['cua_funcionario']
+            try:
+                registro = Funcionario.objects.get(cua_funcionario=codigo)    
+                funcionario_var = get_object_or_404(Funcionario,pk=registro.id)
+                return render(request,'funcionarios/detalle.html', {'funcionario':funcionario_var})
+            except ObjectDoesNotExist:
+                print ('saliendo por el else')
+                error = 'El código no existe en la base de datos.'
+                #return HttpResponse(error)
+                return render(request, 'funcionarios/name.html', {
+                    'codigo_form': codigo_form,
+                    'error': 'El código no existe en la base de datos.'
+                })
+    else:
+        codigo_form = CuaFuncionario()
+
+    return render(request, 'funcionarios/name.html' , {'codigo_form': codigo_form})
+
+
+def verificar_codigo_func(request):
+    if request.method == 'POST':
+        codigo_form = CodFuncionario(request.POST)
+        if codigo_form.is_valid():
+            codigo = codigo_form.cleaned_data['codigo_funcionario']
+            try:
+                registro = Funcionario.objects.get(codigo_funcionario=codigo)    
+                funcionario_var = get_object_or_404(Funcionario,pk=registro.id)
+                return render(request,'funcionarios/detalle.html', {'funcionario':funcionario_var})
+            except ObjectDoesNotExist:
+                print ('saliendo por el else')
+                error = 'El código no existe en la base de datos.'
+                #return HttpResponse(error)
+                return render(request, 'funcionarios/name_func.html', {
+                    'codigo_form': codigo_form,
+                    'error': 'El código no existe en la base de datos.'
+                })
+    else:
+        codigo_form = CodFuncionario()
+
+    return render(request, 'funcionarios/name_func.html' , {'codigo_form': codigo_form})
+
+
+def recupera_codigo_func(request):
+    if request.method == 'POST':
+        codigo_form = CodFuncionario(request.POST)
+        if codigo_form.is_valid():
+            codigo = codigo_form.cleaned_data['codigo_funcionario']
+            try:
+                registro = Funcionario.objects.get(codigo_funcionario=codigo)    
+                funcionario_var = get_object_or_404(Funcionario,pk=registro.id)
+                #lleva_parametro=editar_funcionario(request,registro.id)
+                #return redirect('home')
+                #return render(request,'funcionarios/editar.html', {'funcionario':funcionario_var})
+                return redirect (f'editar_funcionario/'+str(funcionario_var.id))
+            except ObjectDoesNotExist:
+                print ('saliendo por el else')
+                error = 'El código no existe en la base de datos.'
+                #return HttpResponse(error)
+                return render(request, 'funcionarios/modiffunc.html', {
+                    'codigo_form': codigo_form,
+                    'error': 'El código no existe en la base de datos.'
+                })
+    else:
+        codigo_form = CodFuncionario()
+
+    return render(request, 'funcionarios/modiffunc.html' , {'codigo_form': codigo_form})
 
 
 
@@ -33,12 +108,12 @@ def detalle_funcionario(request,id):
     funcionario_var = get_object_or_404(Funcionario,pk=id)
     return render(request,'funcionarios/detalle.html', {'funcionario':funcionario_var})
 
-def cua_funcionario(request,cua_funcionario):
+def cua_funcionario(request,cuafuncionario):
     #funcionario_var = Funcionario.objects.get(pk=id)
     funcionario_var = get_object_or_404(Funcionario,pk=cua_funcionario)
     return render(request,'funcionarios/detalle.html', {'funcionario':funcionario_var})
 
-#FuncionarioForm = modelform_factory(Funcionario,exclude=[])
+    FuncionarioForm = modelform_factory(Funcionario,exclude=[])
 
 def nuevo_funcionario(request):
     if request.method == "POST":
@@ -58,14 +133,15 @@ def nuevo_funcionario(request):
     return render (request, "funcionarios/nuevo.html",{'formaFuncionario':formaFuncionario})
 
 def editar_funcionario(request, id):
+    print('LLego a editar_funcionario', "request.method ",request.method, "Id", id)
+    funcionario_var = get_object_or_404(Funcionario,pk=id)
     if request.method == "POST":
-        funcionario_var = get_object_or_404(Funcionario,pk=id)
+        print(funcionario_var.id, funcionario_var.codigo_funcionario)
         formaFuncionario = FuncionarioForm(request.POST, instance=funcionario_var)
         if formaFuncionario.is_valid():
             formaFuncionario.save()
-            return redirect('index')
+            return redirect('home')
     else:
-        funcionario_var = get_object_or_404(Funcionario,pk=id)
         formaFuncionario = FuncionarioForm(instance=funcionario_var)
-   
+    print('Primera pasada')
     return render (request, "funcionarios/editar.html",{'formaFuncionario':formaFuncionario})
