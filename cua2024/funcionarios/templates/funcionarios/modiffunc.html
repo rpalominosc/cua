@@ -15,13 +15,21 @@
                 <p class="col-md-3 justify-content-center ">
                   <h4 class="container text-center pt-5">Codigo Funcionario    </h4>
                 </p>
+                {% if mensaje_error %}
+                    <div class="alert alert-danger">
+                        {{ mensaje_error }}
+                    </div>
+                    <a href="/recupera_codigo_func">
+                        <input class="btn btn-success" type="submit" value="Volver">
+                    </a>
+                {% else %}
+                    <form action="/recupera_codigo_func" method="POST">
+                        {% csrf_token %}
+                        {{ codigo_form.as_p }}
 
-                <form action="/recupera_codigo_func" method="POST">
-                    {% csrf_token %}
-                    {{ codigo_form.as_p }}
-                    
-                    <center><input label="Consultar" type="submit" class="btn btn-success btn-lg"  ></center>
-                </form>
+                        <center><input label="Consultar" type="submit" class="btn btn-success btn-lg"  ></center>
+                    </form>
+                {% endif %}
             </div>
         </center>
     </body>

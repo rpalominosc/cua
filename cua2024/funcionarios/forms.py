@@ -7,6 +7,8 @@ class FuncionarioForm(ModelForm):
 
     class Meta:
         model = Funcionario
+        #fields = ['codigo_funcionario', 'nombre_funcionario', 'grado_funcionario', 'departamento_funcionario', 'estado_funcionario']
+        #exclude = ['cua_funcionario']
         fields = '__all__'
         #widgets = {
         #   }

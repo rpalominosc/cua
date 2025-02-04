@@ -8,14 +8,18 @@
 </head>
 {% block content %}
     <body>
-        <form method="POST">
-            <h1>Agregar Funcionario</h1>
-            <table>
-                {{formaFuncionario}}
-            </table>
-            <button type="submit"> Enviar </button>
-            {% csrf_token %}
-        </form>
+        <div class="card mx-auto bg-success text-color=white" style="width:30rem ">
+            <div class="container">
+            <h1 class="card-title center">Ingresar Funcionario</h1>
+                <form method="POST">
+                    <table>
+                        {{formaFuncionario}}
+                    </table>
+                    <button type="submit"> Enviar </button>
+                    {% csrf_token %}
+                </form>
+            </div>
+        </div>
 </body>
 {% endblock content %}
 </html>

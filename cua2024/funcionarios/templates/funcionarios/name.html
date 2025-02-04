@@ -11,18 +11,24 @@
 {%block content%}
     <body>
         <center>
-    
             <div class="text-left row border justify-content-center align-items-center" style="max-width:300px">
                 <p class="col-md-3 justify-content-center ">
                   <h4 class="container text-center pt-5">Ingreso CUA Funcionario    </h4>
                 </p>
-
-                <form action="/verificar_codigo_cua" method="POST">
-                    {% csrf_token %}
-                    {{ codigo_form.as_p }}
-                    
-                    <center><input label="Consultar" type="submit" class="btn btn-success btn-lg"  ></center>
-                </form>
+                {% if mensaje_error %}
+                    <div class="alert alert-danger">
+                        {{ mensaje_error }}
+                    </div>
+                    <a href="/verificar_codigo_cua">
+                        <input class="btn btn-success" type="submit" value="Volver">
+                    </a>
+                {% else %}
+                    <form action="/verificar_codigo_cua" method="POST">
+                        {% csrf_token %}
+                        {{ codigo_form.as_p }}
+                        <center><button class="btn btn-success" type="submit"> Consultar</button></center>
+                    </form>
+                {% endif %}
             </div>
         </center>
     </body>

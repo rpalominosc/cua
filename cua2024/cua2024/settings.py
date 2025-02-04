@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'cua2024.wsgi.application'
 DATABASES ={
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cua2024-db',
+        'NAME': 'cua2024db',
         'USER': 'root',
         'PASSWORD':'secret',
         'HOST':'127.0.0.1',
