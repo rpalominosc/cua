@@ -30,7 +30,7 @@ class Funcionario(models.Model):
    
     nombre_funcionario = models.CharField(max_length=150)
     cua_funcionario=models.CharField(max_length=7,unique=True)
-    grado_funcionario =models.ForeignKey(Grado,default=17,  on_delete=models.SET_DEFAULT)
+    grado_funcionario =models.ForeignKey(Grado,default=20,  on_delete=models.SET_DEFAULT)
     departamento_funcionario = models.ForeignKey(Departamento, default=41, on_delete=models.SET_DEFAULT)
     estado_funcionario = models.ForeignKey(Estado, default=4, on_delete=models.SET_DEFAULT)
 
