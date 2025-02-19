@@ -28,7 +28,6 @@ def verificar_codigo_cua(request):
                 funcionario_var = get_object_or_404(Funcionario,pk=registro.id)
                 return render(request,'funcionarios/detalle.html', {'funcionario':funcionario_var})
             except ObjectDoesNotExist as e:
-                print ('saliendo por el else')
                 contexto={
                     'codigo_form': codigo_form,
                     'mensaje_error': 'El código no existe en la base de datos.'
@@ -127,23 +126,11 @@ def nuevo_funcionario(request):
 
 def editar_funcionario(request, id):
     funcionario_var = get_object_or_404(Funcionario,pk=id)
-
-
     if request.method == "POST":
-        print("POST Data:", request.POST)
-        formaFuncionario = FuncionarioFormparagrabar(request.POST, instance=funcionario_var)
-        print("Form Fields:", formaFuncionario.fields.keys())
+        formaFuncionario = FuncionarioForm(request.POST, instance=funcionario_var)
         if formaFuncionario.is_valid():
-            print('Validó OK el formulario')
-            instancia = formaFuncionario.save(commit=False)
-            instancia.cua_funcionario = funcionario_var.cua_funcionario
-            instancia.save()
-            #formaFuncionario.save()
+            formaFuncionario.save()
             return redirect('home')
-        else:
-            #formaFuncionario = FuncionarioFormparagrabar(instance=funcionario_var, initial={'cua_funcionario': funcionario_var.cua_funcionario})
-            print(formaFuncionario.errors)
-            return render (request, "funcionarios/editar.html",{'formaFuncionario':formaFuncionario})
     else:
-        formaFuncionario = FuncionarioFormparagrabar(instance=funcionario_var, initial={'cua_funcionario': funcionario_var.cua_funcionario})
-        return render (request, "funcionarios/editar.html",{'formaFuncionario':formaFuncionario})
+        formaFuncionario = FuncionarioForm(instance=funcionario_var)
+    return render (request, "funcionarios/editar.html",{'formaFuncionario':formaFuncionario})

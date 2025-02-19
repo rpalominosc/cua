@@ -8,8 +8,10 @@ class FuncionarioForm(ModelForm):
     class Meta:
         model = Funcionario
         #fields = ['codigo_funcionario', 'nombre_funcionario', 'grado_funcionario', 'departamento_funcionario', 'estado_funcionario']
-        #exclude = ['cua_funcionario']
         fields = '__all__'
+        exclude = ['cua_funcionario']
+
+        #cua_funcionario = forms.CharField(disabled = True)  # Campo solo lectura
         #widgets = {
         #   }
 
@@ -29,13 +31,10 @@ class CodFuncionario(forms.Form):
                                     }))
 
 class FuncionarioFormparagrabar(ModelForm):
-    #cua_funcionario = forms.CharField(widget=forms.HiddenInput())
     class Meta:
         model = Funcionario
-        fields = ['codigo_funcionario', 'nombre_funcionario', 'grado_funcionario', 'departamento_funcionario', 'estado_funcionario']
-        def __init__(self, *args, **kwargs):
-            super(UserEditForm, self).__init__(*args, **kwargs)
-            self.fields['cua_funcionario'].disabled = True
+        fields = ['codigo_funcionario', 'nombre_funcionario','cua_funcionario', 'grado_funcionario', 'departamento_funcionario', 'estado_funcionario']
+        
         #cua_funcionario = forms.CharField(disabled=True)  # Campo solo lectura
         #widgets = {
         #   }

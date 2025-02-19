@@ -9,3 +9,13 @@
             {% csrf_token %}
             {{formaFuncionario.as_p}}
         </form>
+
+
+        <!-- <td>
+            <form action="editar_funcionario/{{funcionario.id}}" method="POST"  >
+            <! <form action="{% url 'editar_funcionario' funcionario.id %}" method="POST"> -->
+                {% csrf_token %} 
+                {{ FuncionarioFormparagrabar.as_p}} 
+                <button type="submit" class="btn btn-outline-success">Editar </button>
+            </form>
+        </td> --> 
