@@ -1,3 +1,11 @@
 {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+
+    <!-- <form action="{% url 'editar_funcionario' funcionario.id %}" method="POST"> -->
+       
+       
+        <form action="editar_funcionario/{{funcionario.id}}" method="POST"  >         
+            {% csrf_token %}
+            {{formaFuncionario.as_p}}
+        </form>

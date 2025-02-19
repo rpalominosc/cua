@@ -12,9 +12,10 @@
 <body>
     {% block content %}
     <h1 class="text-center"> Sistema de administracion CUA</h1>
+    <h1 class="text-center"> Listado general</h1>
 
     
-    <div class="container">
+    <div class="container-fluid">
         <table class="table table-success table-bordered table-striped" border="1">
             <thead>
                 <tr>
@@ -40,11 +41,13 @@
                     <td>{{funcionario.departamento_funcionario}}</td>
                     <td>{{funcionario.estado_funcionario}}</td>
                     <td><a class="btn btn-outline-success" href="detalle_funcionario/{{funcionario.id}}" role="button">Ver</a></td>
+                    <!--<td><a class="btn btn-outline-success" href="editar_funcionario/{{funcionario.id}}" role="button">Editar</a></td> -->
                     <td>
-                        <form action="editar_funcionario/{{funcionario.id}}" method="POST" style="display: inline;" >
-                            <input type="hidden" name="funcionario.cua_funcionario" value="{{ funcionario_var.cua_funcionario }}">
-                            {% csrf_token %}
-                            {{ formaFuncionario.as_p}}
+                        <!-- <form action="editar_funcionario/{{funcionario.id}}" method="POST"  > -->
+                        <form action="{% url 'editar_funcionario' funcionario.id %}" method="POST"> 
+                            <input type="hidden" name="funcionario.cua_funcionario" value="{{ funcionario.cua_funcionario }}"> 
+                            {% csrf_token %} 
+                            {{ FuncionarioFormparagrabar.as_p}} 
                             <button type="submit" class="btn btn-outline-success">Editar </button>
                         </form>
                     </td> 

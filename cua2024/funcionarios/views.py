@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from jsonschema import ValidationError
 from django.core.exceptions import ObjectDoesNotExist
-from funcionarios.forms import FuncionarioForm, CuaFuncionario, CodFuncionario
+from funcionarios.forms import FuncionarioForm, CuaFuncionario, CodFuncionario, FuncionarioFormparagrabar
 from funcionarios.models import Funcionario,Grado
 from django.forms import modelform_factory, ModelChoiceField,forms
+from funcionarios.models import Funcionario, Grado, Departamento, Estado
+
 import random, time
 
 
@@ -66,12 +68,9 @@ def recupera_codigo_func(request):
             try:
                 registro = Funcionario.objects.get(codigo_funcionario=codigo)    
                 funcionario_var = get_object_or_404(Funcionario,pk=registro.id)
-                #url = 'http://localhost:8000/editar_funcionario/'
-                funcionario = funcionario_var.id
-                #data = {'codigo_funcionario':'codigo_funcionario'}
-                #response = request.post(url, data=data)
-                url = '/editar_funcionario/'
-                return render (request,url)
+                url = 'editar_funcionario/'+str(registro.id)
+                return redirect (url)
+
             except ObjectDoesNotExist as e:
                 return render(request, 'funcionarios/modiffunc.html', {
                     'codigo_form': codigo_form,
@@ -127,21 +126,24 @@ def nuevo_funcionario(request):
     return render (request, "funcionarios/nuevo.html",{'formaFuncionario':formaFuncionario})
 
 def editar_funcionario(request, id):
-    print('llegó a editar_funcionario', request.method, 'Primera vez')
     funcionario_var = get_object_or_404(Funcionario,pk=id)
-    if request.method == "POST":
-        print(funcionario_var.codigo_funcionario, "Cua_funcionario->", funcionario_var.cua_funcionario)
-        #print(request.POST)
-        formaFuncionario = FuncionarioForm(request.POST , instance=funcionario_var)
-        print('Cua de nuevo antes de evaluar form', funcionario_var.cua_funcionario)
-        print('Funcionario antes de evaluar form', funcionario_var.codigo_funcionario)
 
-        #print(formaFuncionario)
+
+    if request.method == "POST":
+        print("POST Data:", request.POST)
+        formaFuncionario = FuncionarioFormparagrabar(request.POST, instance=funcionario_var)
+        print("Form Fields:", formaFuncionario.fields.keys())
         if formaFuncionario.is_valid():
-            formaFuncionario.save()
+            print('Validó OK el formulario')
+            instancia = formaFuncionario.save(commit=False)
+            instancia.cua_funcionario = funcionario_var.cua_funcionario
+            instancia.save()
+            #formaFuncionario.save()
             return redirect('home')
         else:
+            #formaFuncionario = FuncionarioFormparagrabar(instance=funcionario_var, initial={'cua_funcionario': funcionario_var.cua_funcionario})
             print(formaFuncionario.errors)
+            return render (request, "funcionarios/editar.html",{'formaFuncionario':formaFuncionario})
     else:
-        formaFuncionario = FuncionarioForm(instance=funcionario_var)
-    return render (request, "funcionarios/editar.html",{'formaFuncionario':formaFuncionario})
+        formaFuncionario = FuncionarioFormparagrabar(instance=funcionario_var, initial={'cua_funcionario': funcionario_var.cua_funcionario})
+        return render (request, "funcionarios/editar.html",{'formaFuncionario':formaFuncionario})

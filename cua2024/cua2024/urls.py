@@ -30,7 +30,7 @@ urlpatterns = [
     #path('contacto', contacto),
     path('detalle_funcionario/<int:id>',detalle_funcionario),
     path('nuevo_funcionario', nuevo_funcionario),
-    path('editar_funcionario/<int:id>',editar_funcionario),
+    path('editar_funcionario/<int:id>',editar_funcionario, name='editar_funcionario'),
     path('bienvenido',bienvenido),
     path('codfuncionario',pide_cod_func),
     path('cua_funcionario',cua_funcionario),

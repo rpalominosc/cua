@@ -12,18 +12,17 @@
 </head>
 {% block content %}
 <body>
-    <div class="card mx-auto border-success text-color=white" style="width:30rem ">
+    <div class="card mx-auto border-success text-color=white" style="width:50rem ">
         <div class="container">
             <h1 class="card-title" style="color: darkgreen; text-align: center ">Editar Funcionario</h1>
-            <form method="POST">
-                
-                <table class="table-success border-success mb-4"> 
-                    {{formaFuncionario}}
-                </table>    
+
+            <form action="editar_funcionario/{{funcionario.id}}" method="POST"  >         
                 {% csrf_token %}
+                {{formaFuncionario.as_p}}
             </form>
+
+            <button type="submit" class="btn btn-success mx-auto "> Grabar </button>
         </div>
-        <button type="submit" class="btn btn-success mx-auto "> Grabar </button>
 
     </div>
 

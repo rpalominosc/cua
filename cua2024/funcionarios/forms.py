@@ -27,3 +27,15 @@ class CodFuncionario(forms.Form):
                                         'class':'form-control',
                                         'placeholder':'999999-X',
                                     }))
+
+class FuncionarioFormparagrabar(ModelForm):
+    #cua_funcionario = forms.CharField(widget=forms.HiddenInput())
+    class Meta:
+        model = Funcionario
+        fields = ['codigo_funcionario', 'nombre_funcionario', 'grado_funcionario', 'departamento_funcionario', 'estado_funcionario']
+        def __init__(self, *args, **kwargs):
+            super(UserEditForm, self).__init__(*args, **kwargs)
+            self.fields['cua_funcionario'].disabled = True
+        #cua_funcionario = forms.CharField(disabled=True)  # Campo solo lectura
+        #widgets = {
+        #   }
