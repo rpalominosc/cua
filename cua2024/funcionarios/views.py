@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
+from django.contrib.auth import *
+from django.contrib import messages
 from jsonschema import ValidationError
 from django.core.exceptions import ObjectDoesNotExist
 from funcionarios.forms import FuncionarioForm, CuaFuncionario, CodFuncionario, FuncionarioFormparagrabar
-from funcionarios.models import Funcionario,Grado
 from django.forms import modelform_factory, ModelChoiceField,forms
 from funcionarios.models import Funcionario, Grado, Departamento, Estado
 
@@ -130,7 +131,12 @@ def editar_funcionario(request, id):
         formaFuncionario = FuncionarioForm(request.POST, instance=funcionario_var)
         if formaFuncionario.is_valid():
             formaFuncionario.save()
+            messages.success(request, 'La operación se realizó con éxito.')
             return redirect('home')
     else:
         formaFuncionario = FuncionarioForm(instance=funcionario_var)
     return render (request, "funcionarios/editar.html",{'formaFuncionario':formaFuncionario})
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')

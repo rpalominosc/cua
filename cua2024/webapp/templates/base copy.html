@@ -16,11 +16,11 @@
             font-family: Arial, sans-serif;
         }
         header {
-            background-color:#c4c1b8;  
+            background-color: #2a642c;  /* Color verde */
             display: flex;
             align-items: center;
             padding: 10px;
-            color: Black;
+            color: white;
         }
         header img {
             
@@ -38,15 +38,16 @@
 </header>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success text-white ">
+    <nav class="navbar navbar-expand-lg  bg-success ">
         <div class="container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent"  >
+          <div class="collapse navbar-collapse " id="navbarSupportedContent"  >
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'home' %}">Inicio</a> 
+                {#<a class="nav-link active" href="http://localhost:8000/">Inicio</a> #}
+                <a class="nav-link active" href="{% url 'home' %}">Inicio</a> 
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="verificar_codigo_func">Consulta Funcionario</a>
@@ -93,9 +94,4 @@
         {% endblock %}
     </div>
 </body>
-
-{% block extrascripts %}
-  <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-{% endblock %}
 </html>

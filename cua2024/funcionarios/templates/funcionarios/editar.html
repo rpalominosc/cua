@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
     {% extends "base.html" %}   
+    {% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Funcionario</title>
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     
     
@@ -17,18 +17,33 @@
             <h1 class="card-title" style="color: darkgreen; text-align: center ">Editar Funcionario</h1>
 
             <form  method="POST"  >         
+                {% csrf_token %}
                 <table>
                     {{formaFuncionario}}
                 </table>
                 <center><button type="submit" class="btn btn-success mx-auto "> Grabar </button></center>
-                {% csrf_token %}
             </form>
-
-            
         </div>
+        {% if messages %}
+            <div  class="alert alert-success" id="mensajePopup" style="display:none;">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}   
 
     </div>
+    
+{% endblock content %}
+
+
+<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+
+{% block extrascripts %}
+<script type="text/JavaScript" src="{%  static 'js/hechoamano.js' %}"></script>
+{% endblock %}
+
+
 
 </body>
-{% endblock content %}
 </html>

@@ -17,7 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from funcionarios.views import detalle_funcionario, nuevo_funcionario, editar_funcionario, pide_cod_func,cua_funcionario,verificar_codigo_cua, verificar_codigo_func
+from django.conf import settings
+from django.conf.urls.static import static
+
+from funcionarios.views import detalle_funcionario, nuevo_funcionario, editar_funcionario, pide_cod_func,cua_funcionario,verificar_codigo_cua, verificar_codigo_func,logout_view
 from funcionarios.views import selecciona_funcionario, recupera_codigo_func
 from webapp.views import bienvenido,inicio #, contacto, despedirse
 
@@ -38,10 +41,6 @@ urlpatterns = [
     path('verificar_codigo_func',verificar_codigo_func),
     path('recupera_codigo_func',recupera_codigo_func),
     path('selecciona_funcionario',selecciona_funcionario),
+    path('logout/', logout_view, name='logout'),
 
-
-
-
-
-
-] 
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
