@@ -96,7 +96,7 @@ def valida_existencia_cua():
     return(cua_generado)
 
 def detalle_funcionario(request,id):
-    print('llegó a detalle_funcionario', request.method, id)
+    #print('llegó a detalle_funcionario', request.method, id)
     #funcionario_var = Funcionario.objects.get(pk=id)
     funcionario_var = get_object_or_404(Funcionario,pk=id)
     return render(request,'funcionarios/detalle.html', {'funcionario':funcionario_var})

@@ -18,6 +18,8 @@ from pathlib import Path
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+#import pymysql
+#pymysql.install_as_MySQLdb()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -28,7 +30,7 @@ SECRET_KEY = 'django-insecure-p%r-w7v02p-(*5v&9i#8kkuip!*)*&t1%!bxy!eqeuvmfi(cqg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','192.168.1.27','cua.si2.cl']
 
 
 # Application definition
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'cua2024.urls'
@@ -89,10 +92,10 @@ DATABASES ={
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cua2024db',
-        'USER': 'root',
-        'PASSWORD':'secret',
-        'HOST':'127.0.0.1',
-        'PORT':'3306',
+        'USER': 'rpalominos',
+        'PASSWORD':'Polux9leo.',
+        'HOST':'192.168.1.27',
+        'PORT':'33060',
     }
 }
 
@@ -131,6 +134,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 #STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'), ]
 STATIC_URL = 'funcionarios/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

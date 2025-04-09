@@ -13,7 +13,7 @@
             <h1 class="card-title" style="color: darkgreen; text-align: center">Ingresar Funcionario</h1>
                 <form method="POST">
                     <table>
-                        {{formaFuncionario}}
+                        {{formaFuncionario.as_table}}
                     </table>
                     <center><button type="submit" class="btn btn-success mx-auto "> Enviar </button></center>
                     {% csrf_token %}

@@ -25,7 +25,7 @@
                 {% else %}
                     <form action="/recupera_codigo_func" method="POST">
                         {% csrf_token %}
-                        {{ codigo_form.as_p }}
+                        {{ codigo_form.as_table }}
 
                         <center><input label="Consultar" type="submit" class="btn btn-success btn-lg"  ></center>
                     </form>
